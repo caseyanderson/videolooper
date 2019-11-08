@@ -34,10 +34,10 @@ Two quick changes to one config file: `/boot/config.txt`
 
 ## acquiring and playing a video
 
-1. download and install `youtube downloader` via `apitutude`: `sudo apt-get install youtube-dl`
-2. locate a short video on youtube to act as a test file. for example, one can download the "original" [Nyan Cat](https://en.wikipedia.org/wiki/Nyan_Cat) animation from youtube (as of 03/14/2017) via: `youtube-dl https://www.youtube.com/watch?v=QH2-TGUlwu4&t=4s`
-3. use the Unix command `mv` to change the Nyan Cat video filename (which is obnoxious) to simply `nyan_cat.mp4`: `mv Nyan\ Cat\ \[original\]-QH2-TGUlwu4.mp4 nyan_cat.mp4`
-4. play the video: `omxplayer nyan_cat.mp4`
+1. Download and install `youtube downloader` via `apitutude`: `sudo apt-get install youtube-dl`
+2. Locate a short video on youtube to act as a test file. for example, one can download the "original" [Nyan Cat](https://en.wikipedia.org/wiki/Nyan_Cat) animation from youtube (as of 03/14/2017) via: `youtube-dl https://www.youtube.com/watch?v=QH2-TGUlwu4&t=4s`
+3. Use the Unix command `mv` to change the Nyan Cat video filename (which is obnoxious) to simply `nyan_cat.mp4`: `mv Nyan\ Cat\ \[original\]-QH2-TGUlwu4.mp4 nyan_cat.mp4`
+4. Play the video: `omxplayer nyan_cat.mp4`
 
 
 ## looping a video file
@@ -59,11 +59,11 @@ more specifically:
 
 With minimal alterations, and a bit of setup, one can make a `bash` file that runs the omxplayer loop command:
 
-1. on your raspberry pi make a folder called `videolooper` in your `home` directory: `mkdir videolooper`
-2. cd into `videolooper`: `cd videolooper`
-3. make a `video` folder inside `videolooper` (videos will be stored here): `mkdir video`
-4. on your mac make a new file called `loop_one.sh` wherever you want (we are going to set this up and then send it to the raspberry pi via `scp`): `touch loop_one.sh`
-5. open up `loop_one.sh` in whatever text editor you like (remember, we are still on our mac at this point). i like [Atom](https://atom.io/) : `atom loop_one.sh`
+1. On your raspberry pi make a folder called `videolooper` in your `home` directory: `mkdir videolooper`
+2. `cd` into `videolooper`: `cd videolooper`
+3. Make a `video` folder inside `videolooper` (videos will be stored here): `mkdir video`
+4. On your mac make a new file called `loop_one.sh` wherever you want (we are going to set this up and then send it to the raspberry pi via `scp`): `touch loop_one.sh`
+5. Open up `loop_one.sh` in whatever text editor you like (remember, we are still on our mac at this point). i like [Vim](https://www.vim.org/)
 6. Copy the following code and paste it all into your `loop_one.sh` file (then save and exit):
 
     ```bash
@@ -72,23 +72,22 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
     omxplayer -b --loop --no-osd -o hdmi /home/pi/nyan_cat.mp4
 
     ```
-7. use `scp` to send `loop_one.sh` to your raspberry pi (note, this requires knowledge of your pi's ip address): `scp loop_one.sh pi@<PI_IP_ADDRESS>:/home/pi/`
-
-8. back on your pi, make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
-9. run `loop_one.sh` with the following command `./loop_one.sh`
+7. Use `scp` to send `loop_one.sh` to your raspberry pi (note, this requires knowledge of your pi's ip address): `scp loop_one.sh pi@<PI_IP_ADDRESS>:/home/pi/`
+8. Back on your pi, make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
+9. Run `loop_one.sh` with the following command `./loop_one.sh`
 10. `Control-C` (KeyboardInterrupt) to exit loop
 
 
 ## looping all videos in a playlist forever
 
-1. on your mac make a new file called `loop_all.sh`: `touch loop_all.sh`
-2. open it with your preferred text editor  (again, I use Atom so it looks like this when I do it): `atom loop_all.sh`
+1. On your mac make a new file called `loop_all.sh`: `touch loop_all.sh`
+2. Open it with your preferred text editor  (again, I use Atom so it looks like this when I do it): `atom loop_all.sh`
 3. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
-4. send `loop_all.sh` to your raspberry pi: `scp loop_all.sh pi@<PI_IP_ADDRESS>:/home/pi/`
-5. move the file into the `videolooper` directory: `mv loop_all.sh videolooper/loop_all.sh`
-6. update `loop_all.sh` to include the correct path and filename information (via `nano` or `vi`) stored at `VIDEOPATH`
-7. make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
-8. run `loop_all.sh` with the following command `./loop_all.sh`
+4. Send `loop_all.sh` to your raspberry pi: `scp loop_all.sh pi@<PI_IP_ADDRESS>:/home/pi/`
+5. Move the file into the `videolooper` directory: `mv loop_all.sh videolooper/loop_all.sh`
+6. Update `loop_all.sh` to include the correct path and filename information (via `nano` or `vi`) stored at `VIDEOPATH`
+7. Make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
+8. Run `loop_all.sh` with the following command `./loop_all.sh`
 9. `Control-C` (KeyboardInterrupt) to exit loop
 
 
@@ -96,12 +95,12 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
 There are lots of ways to run a file on startup. Regardless of whether one needs to loop one video forever on boot or loop several videos in a folder forever on boot, its simply a matter of specifying which script (file) one wants to use with `rc.local` (the service which will launch the script on boot):
 
-1. on your pi open `rc.local` with `nano` or `vi`: `sudo nano /etc/rc.local`
-2. scroll until you see `exit 0` at the bottom of the file and add two new lines above `exit 0` (`exit 0` has to be the last line in this file)
-3. assuming you want to loop all folders in a directory, configure `rc.local` to run `loop_all.sh` with `bash` as a background process  on boot (the `&` at the end of the loop is mission critical here): `su -c "sh /path/to/file/loop_all.sh" pi &`
-4. save and exit
-5. reboot: `sudo reboot now`
-6. confirm that the looper starts up shortly after the login prompt appears. if not happen make sure `loop_all.sh` has been made executable (`chmod +x loop_all.sh`)
-7. since the line in `rc.local` ends with an `&` one can login back into the pi and, among other things, stop the looping process from launching automatically on boot: comment out (add a `#` in front of) the line we just added to `rc.local` in order to revert to non-looping functionality. save, exit, and reboot to confirm non-looping behavior.
+1. On your pi open `rc.local` with `nano` or `vi`: `sudo nano /etc/rc.local`
+2. Scroll until you see `exit 0` at the bottom of the file and add two new lines above `exit 0` (`exit 0` has to be the last line in this file)
+3. Assuming you want to loop all folders in a directory, configure `rc.local` to run `loop_all.sh` with `bash` as a background process  on boot (the `&` at the end of the loop is mission critical here): `su -c "sh /path/to/file/loop_all.sh" pi &`
+4. Save and exit
+5. Reboot: `sudo reboot now`
+6. Confirm that the looper starts up shortly after the login prompt appears. if not happen make sure `loop_all.sh` has been made executable (`chmod +x loop_all.sh`)
+7. Since the line in `rc.local` ends with an `&` one can login back into the pi and, among other things, stop the looping process from launching automatically on boot: comment out (add a `#` in front of) the line we just added to `rc.local` in order to revert to non-looping functionality. save, exit, and reboot to confirm non-looping behavior.
 
-alternately, if one wanted to use the `loop_one.sh` script and not `loop_all.sh`, or even to some other `bash` script, one would simply point `rc.local` to `loop_one.sh`, resulting in the following line: `su -c "sh /path/to/file/loop_all.sh" pi &`
+Alternately, if one wanted to use the `loop_one.sh` script and not `loop_all.sh`, or even to some other `bash` script, one would simply point `rc.local` to `loop_one.sh`, resulting in the following line: `su -c "sh /path/to/file/loop_all.sh" pi &`
