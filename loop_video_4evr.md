@@ -83,7 +83,7 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
 1. on your mac make a new file called `loop_all.sh`: `touch loop_all.sh`
 2. open it with your preferred text editor  (again, I use Atom so it looks like this when I do it): `atom loop_all.sh`
-3. Copy the code from [this](https://github.com/caseyanderson/rpi/blob/master/02_VideoLooper/loop_scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
+3. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
 4. send `loop_all.sh` to your raspberry pi: `scp loop_all.sh pi@<PI_IP_ADDRESS>:/home/pi/`
 5. move the file into the `videolooper` directory: `mv loop_all.sh videolooper/loop_all.sh`
 6. update `loop_all.sh` to include the correct path and filename information (via `nano` or `vi`) stored at `VIDEOPATH`
