@@ -19,6 +19,7 @@ else
         do
                 clear
                 omxplayer -b --no-osd -o hdmi $entry > /dev/null
+                clear
         done
 fi
 done
