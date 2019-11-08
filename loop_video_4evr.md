@@ -30,7 +30,7 @@ Two quick changes to one config file: `/boot/config.txt`
     hdmi_mode=16
     ```
 
-3. Save and exit the file.
+3. Save and exit the file
 
 ## acquiring and playing a video
 
