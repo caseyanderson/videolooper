@@ -73,9 +73,9 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
     ```
 
-8. Make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
-9. Run `loop_one.sh` with the following command `./loop_one.sh`
-10. `Control-C` (KeyboardInterrupt) to exit loop
+3. Make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
+4. Run `loop_one.sh` with the following command `./loop_one.sh`
+5. `Control-C` (KeyboardInterrupt) to exit loop
 
 
 ## looping all videos in a playlist forever
