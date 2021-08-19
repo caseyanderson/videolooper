@@ -63,33 +63,25 @@ more specifically:
 
 With minimal alterations, and a bit of setup, one can make a `bash` file that runs the omxplayer loop command:
 
-1. On your raspberry pi make a folder called `videolooper` in your `home` directory: `mkdir videolooper`
-2. `cd` into `videolooper`: `cd videolooper`
-3. Make a `video` folder inside `videolooper` (videos will be stored here): `mkdir video`
-4. On your mac make a new file called `loop_one.sh` wherever you want (we are going to set this up and then send it to the raspberry pi via `scp`): `touch loop_one.sh`
-5. Open up `loop_one.sh` in whatever text editor you like (remember, we are still on our mac at this point). i like [Vim](https://www.vim.org/)
-6. Copy the following code and paste it all into your `loop_one.sh` file (then save and exit):
+1. On your raspberry pi make a file called `loop_one.sh`: `nano loop_one.sh`
+2. Copy the following code and paste it all into your `loop_one.sh` file (then save and exit):
 
     ```bash
     #!/bin/sh
 
-    omxplayer -b --loop --no-osd -o hdmi /home/pi/nyan_cat.mp4
+    omxplayer -b --loop --no-osd -o hdmi /home/pi/FILENAME.mp4
 
     ```
-7. Use `scp` to send `loop_one.sh` to your raspberry pi (note, this requires knowledge of your pi's ip address): `scp loop_one.sh pi@<PI_IP_ADDRESS>:/home/pi/`
-8. Back on your pi, make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
+8. Make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
 9. Run `loop_one.sh` with the following command `./loop_one.sh`
 10. `Control-C` (KeyboardInterrupt) to exit loop
 
 
 ## looping all videos in a playlist forever
 
-1. On your mac make a new file called `loop_all.sh`: `touch loop_all.sh`
-2. Open it with your preferred text editor  (again, I use Atom so it looks like this when I do it): `atom loop_all.sh`
+1. On your raspberry pi make a new file called `loop_all.sh`: `nano loop_all.sh`
 3. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
-4. Send `loop_all.sh` to your raspberry pi: `scp loop_all.sh pi@<PI_IP_ADDRESS>:/home/pi/`
-5. Move the file into the `videolooper` directory: `mv loop_all.sh videolooper/loop_all.sh`
-6. Update `loop_all.sh` to include the correct path and filename information (via `nano` or `vi`) stored at `VIDEOPATH`
+6. Update `loop_all.sh` to include the correct path and filename information (via `nano`) stored at `VIDEOPATH`
 7. Make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
 8. Run `loop_all.sh` with the following command `./loop_all.sh`
 9. `Control-C` (KeyboardInterrupt) to exit loop
