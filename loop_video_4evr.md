@@ -63,7 +63,7 @@ more specifically:
 
 With minimal alterations, and a bit of setup, one can make a `bash` file that runs the omxplayer loop command:
 
-1. On your raspberry pi make a file called `loop_one.sh`: `nano loop_one.sh`
+1. On your raspberry pi make a file called `loop_one.sh`: `nano loop_one.sh` (you could `vi` if you prefer)
 2. Copy the following code and paste it all into your `loop_one.sh` file (then save and exit):
 
     ```bash
@@ -72,6 +72,7 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
     omxplayer -b --loop --no-osd -o hdmi /home/pi/FILENAME.mp4
 
     ```
+
 8. Make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
 9. Run `loop_one.sh` with the following command `./loop_one.sh`
 10. `Control-C` (KeyboardInterrupt) to exit loop
@@ -79,12 +80,13 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
 ## looping all videos in a playlist forever
 
-1. On your raspberry pi make a new file called `loop_all.sh`: `nano loop_all.sh`
-3. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
-6. Update `loop_all.sh` to include the correct path and filename information (via `nano`) stored at `VIDEOPATH`
-7. Make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
-8. Run `loop_all.sh` with the following command `./loop_all.sh`
-9. `Control-C` (KeyboardInterrupt) to exit loop
+1. On your raspberry pi make a directory to put your videos in called `videos`: `mkdir videos`
+2. Move your videos into the videos folder: `mv *.mp4 videos/` (assumes all your videos are `.mp4`)
+3. Make a new file called `loop_all.sh`: `nano loop_all.sh`
+4. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
+5. Make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
+6. Run `loop_all.sh` with the following command `./loop_all.sh`
+7. `Control-C` (KeyboardInterrupt) to exit loop
 
 
 ## running loop script on startup
