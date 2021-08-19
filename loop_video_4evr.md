@@ -91,7 +91,7 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
 ## running loop script on startup
 
-There are lots of ways to run a file on startup. Regardless of whether one needs to loop one video forever on boot or loop several videos in a folder forever on boot, its simply a matter of specifying which script (file) one wants to use with `rc.local` (the service which will launch the script on boot):
+Whether one needs to loop one video forever or loop several videos in a folder forever it's simply a matter of specifying which script (file) one wants to use with `rc.local` (the service which will launch the script on boot):
 
 1. On your pi open `rc.local` with `nano`: `sudo nano /etc/rc.local`
 2. Scroll until you see `exit 0` at the bottom of the file and add two new lines above `exit 0` (`exit 0` has to be the last line in this file)
