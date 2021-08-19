@@ -35,9 +35,10 @@ Two quick changes to one config file: `/boot/config.txt`
 ## acquiring and playing a video
 
 1. Download and install `youtube downloader` via their [manual installation instructions](https://ytdl-org.github.io/youtube-dl/download.html), also include below:
-    1. `sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl`
+    1. `sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl`
     2. `sudo chmod a+rx /usr/local/bin/youtube-dl`
-    3. `hash -r`
+    3. Confirm that it is working with `youtube-dl --version`
+    4. (optional) Run the following to update `youtube-dl` to the latest version (might not be necessary): `sudo youtube-dl -U`
 2. Locate a short video on youtube to act as a test file. for example, one can download the "original" [Nyan Cat](https://en.wikipedia.org/wiki/Nyan_Cat) animation from youtube (as of 03/14/2017) via: `youtube-dl https://www.youtube.com/watch?v=QH2-TGUlwu4&t=4s`
 3. Use the Unix command `mv` to change the Nyan Cat video filename (which is obnoxious) to simply `nyan_cat.mp4`: `mv Nyan\ Cat\ \[original\]-QH2-TGUlwu4.mp4 nyan_cat.mp4`
 4. Play the video: `omxplayer nyan_cat.mp4`
