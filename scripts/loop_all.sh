@@ -4,7 +4,7 @@
 setterm -cursor off
 
 #set path to folder containing videos
-VIDEOPATH="/home/pi/videolooper/video"
+VIDEOPATH="/home/pi/videolooper/videos"
 
 # you can normally leave this alone
 SERVICE="omxplayer"
