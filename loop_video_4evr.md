@@ -1,11 +1,11 @@
 # Loop a Video 4evr
-Casey Anderson, 2021
+Casey Anderson, 2022
+
+*Note* `OMXPlayer` is being "phased out" in favor of `VLC`, this tutorial assumes usage of `Raspbian Buster Lite (Legacy)`, under which `OMXPlayer` is still available via `aptitude`
 
 ## pre-flight
 
-* [The Command Line](https://gist.github.com/caseyanderson/5d08e5c5fb276b1e8bbc9e56d677492b)
 * [Writing, Backing Up, and Cloning Raspbian (RPi) Images](https://gist.github.com/caseyanderson/31b615045332a6ab3f4028c696920f57)
-* [Connectivity: Laptop to RPi](https://gist.github.com/caseyanderson/7871deb02ca6dd418844db04d3c146fc)
 
 
 ## overview
@@ -59,12 +59,12 @@ more specifically:
 * `-r`: not used in the command above but can force the video to fill the screen
 
 
-## looping one video forever
+## looping one video forever w/ bash
 
 With minimal alterations, and a bit of setup, one can make a `bash` file that runs the omxplayer loop command:
 
-1. On your raspberry pi make a file called `loop_one.sh`: `nano loop_one.sh` (you could `vi` if you prefer)
-2. Copy the following code and paste it all into your `loop_one.sh` file (then save and exit):
+1. On your raspberry pi make a file called `loop-one.sh`: `nano loop-one.sh` (you could `vi` if you prefer)
+2. Copy the following code and paste it all into your `loop-one.sh` file (then save and exit):
 
     ```bash
     #!/bin/sh
@@ -73,34 +73,19 @@ With minimal alterations, and a bit of setup, one can make a `bash` file that ru
 
     ```
 
-3. Make `loop_one.sh` executable with `chmod`: `chmod +x loop_one.sh`
-4. Run `loop_one.sh` with the following command `./loop_one.sh`
+3. Make `loop-one.sh` executable with `chmod`: `chmod +x loop-one.sh`
+4. Run `loop-one.sh` with the following command `./loop-one.sh`
 5. `Control-C` (KeyboardInterrupt) to exit loop
-
-
-## looping all videos in a playlist forever
-
-1. On your raspberry pi make a directory to put your videos in called `videos`: `mkdir videos`
-2. Move your videos into the videos folder: `mv *.mp4 videos/` (assumes all your videos are `.mp4`)
-3. Make a new file called `loop_all.sh`: `nano loop_all.sh`
-4. Copy the code from [this](/scripts/loop_all.sh) file and paste it all into your `loop_all.sh` file (then save and exit)
-5. Make `loop_all.sh` executable with `chmod`: `chmod +x loop_all.sh`
-6. Run `loop_all.sh` with the following command `./loop_all.sh`
-7. `Control-C` (KeyboardInterrupt) to exit loop
 
 
 ## running loop script on startup
 
-Whether one needs to loop one video forever or loop several videos in a folder forever it's simply a matter of specifying which script (file) one wants to use with `rc.local` (the service which will launch the script on boot):
-
 1. On your pi open `rc.local` with `nano`: `sudo nano /etc/rc.local`
 2. Scroll until you see `exit 0` at the bottom of the file and add two new lines above `exit 0` (`exit 0` has to be the last line in this file)
-3. Assuming you want to loop one video forever configure `rc.local` to run `loop_one.sh` with `bash` as a background process  on boot (the `&` at the end of the loop is mission critical here): `su -c "sh /path/to/file/loop_one.sh" pi &`
+3. Assuming you want to loop one video forever configure `rc.local` to run `loop-one.sh` with `bash` as a background process  on boot (the `&` at the end of the loop is mission critical here): `su -c "sh /path/to/file/loop-one.sh" pi &`
 4. Save and exit
 5. Test that we configured `rc.local` correctly (the video should start playing): `sudo /etc/rc.local`
 6. Control-C to cancel playback (assuming it's working)
 7. Reboot: `sudo reboot now`
-8. Confirm that the looper starts up shortly after the login prompt appears. if not happen make sure `loop_one.sh` has been made executable (`chmod +x loop_one.sh`)
+8. Confirm that the looper starts up shortly after the login prompt appears. if not happen make sure `loop-one.sh` has been made executable (`chmod +x loop-one.sh`)
 9. Since the line in `rc.local` ends with an `&` one can login back into the pi and, among other things, stop the looping process from launching automatically on boot: comment out (add a `#` in front of) the line we just added to `rc.local` in order to revert to non-looping functionality. save, exit, and reboot to confirm non-looping behavior.
-
-Alternately, if one wanted to use the `loop_all.sh` script and not `loop_one.sh`, or even to some other `bash` script, one would simply point `rc.local` to `loop_all.sh`, resulting in the following line: `su -c "sh /path/to/file/loop_all.sh" pi &`
