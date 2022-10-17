@@ -5,7 +5,7 @@ Casey Anderson, 2022
 
 ## pre-flight
 
-* [Writing, Backing Up, and Cloning Raspbian (RPi) Images](https://gist.github.com/caseyanderson/31b615045332a6ab3f4028c696920f57)
+* [Writing, Backing Up, and Cloning Raspbian (RPi) Images](https://gist.github.com/caseyanderson/396f94678cccda35dcd4d5a2a91fd69b)
 
 
 ## overview
